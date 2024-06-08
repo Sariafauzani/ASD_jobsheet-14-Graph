@@ -39,5 +39,86 @@ public class GraphMain26 {
         System.out.println("Hasil setelah penghapusan edge");
         gdg.removeEdge(2, 1);
         gdg.printGraph();
+
+        for (int i = 0; i < 4; i++){
+            System.out.println("Degree of Gedung "+ (char) ('A'+i) + ": ");
+            System.out.println("InDegree: "+ gdg.inDegree(i));
+            System.out.println("OutDegree: "+ gdg.outDegree(i));
+            System.out.println();
+        }
+
+        System.out.print("Masukkan jumlah vertex: ");
+        int jmlVertex = sc26.nextInt();
+        GraphMatriks26 graph = new GraphMatriks26(jmlVertex);
+
+        while (true) {
+            System.out.println("Menu:");
+            System.out.println("1. Add Edge");
+            System.out.println("2. Remove Edge");
+            System.out.println("3. Degree");
+            System.out.println("4. Print Graph");
+            System.out.println("5. Cek Edge");
+            System.out.println("6. Update Jarak");
+            System.out.println("7. Hitung Edge");
+            System.out.print("Pilih menu: ");
+            int choice = sc26.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Masukkan gedung asal: ");
+                    int asal = sc26.nextInt();
+                    System.out.print("Masukkan gedung tujuan: ");
+                    int tujuan = sc26.nextInt();
+                    System.out.print("Masukkan jarak: ");
+                    int jarak = sc26.nextInt();
+                    graph.makeEdge(asal, tujuan, jarak);
+                    break;
+                case 2:
+                    System.out.print("Masukkan gedung asal: ");
+                    asal = sc26.nextInt();
+                    System.out.print("Masukkan gedung tujuan: ");
+                    tujuan = sc26.nextInt();
+                    graph.removeEdge(asal, tujuan);
+                    break;
+                case 3:
+                    System.out.print("Masukkan gedung: ");
+                    int vertex = sc26.nextInt();
+                    int inDegree = graph.inDegree(vertex);
+                    int outDegree = graph.outDegree(vertex);
+                    System.out.println("InDegree dari Gedung " + (char) ('A' + vertex) + ": " + inDegree);
+                    System.out.println("OutDegree dari Gedung " + (char) ('A' + vertex) + ": " + outDegree);
+                    System.out.println("Degree dari Gedung " + (char) ('A' + vertex) + ": " + (inDegree + outDegree));
+                    break;
+                case 4:
+                    graph.printGraph();
+                    break;
+                case 5:
+                    System.out.print("Masukkan gedung asal: ");
+                    asal = sc26.nextInt();
+                    System.out.print("Masukkan gedung tujuan: ");
+                    tujuan = sc26.nextInt();
+                    if (gdg.cekEdge(asal, tujuan)){
+                        System.out.println("Edge ada");
+                    } else {
+                        System.out.println("Edge tidak ada");
+                    }
+                    break;
+                case 6:
+                    System.out.println("Masukkan asal: ");
+                    asal = sc26.nextInt();
+                    System.out.println("Masukkan tujuan: ");
+                    tujuan = sc26.nextInt();
+                    System.out.println("Masukkan jarak baru: ");
+                    jarak = sc26.nextInt();
+                    gdg.updateJarak(asal, tujuan, jarak);
+                    break;
+                case 7:
+                    System.out.println("Jumlah edge dalam graf: "+ gdg.hitungEdge());
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid.");
+            }
+            System.out.println();
+        }
     }
 }
